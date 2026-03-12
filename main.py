@@ -1,14 +1,21 @@
+"""
+    Takes in data from a .csv and creates .svg cards from it. 
+    csv data: first_name, last_name, csh_username, major, graduation_year (just the yyyy number), status (Member, Alumni, ...)
+
+    Author: Addison Asuncion
+    Last Updated: 3/12/2026
+"""
+
 import csv
 import svgwrite
 import base64
-
 
 CARD_WIDTH = 900
 CARD_HEIGHT = 1200
 
 card_template = 'templates/MemberTemplate.svg'
 
-# csv data: first_name, last_name, csh_username, major, class_year, status
+# csv data: first_name, last_name, csh_username, major, graduation_year (just the yyyy number), status (Member, Alumni, ...)
 with open("data/data.csv") as file:
     reader = csv.DictReader(file)
 
@@ -36,20 +43,10 @@ with open("data/data.csv") as file:
             case _:
                 raise Exception("invalid status")
 
+        # encode template for embedding into the svg
         with open(card_template, "rb") as f:
             encoded = base64.b64encode(f.read()).decode()
         background_image = f"data:image/svg+xml;base64,{encoded}"
-
-        # Card background
-        drawing.add(
-            drawing.rect(
-                insert=(0, 0),
-                size=(CARD_WIDTH, CARD_HEIGHT),
-                fill="#f5f5f5",
-                rx=15,
-                ry=15
-            )
-        )
 
         # Background template
         drawing.add(
@@ -60,53 +57,61 @@ with open("data/data.csv") as file:
             )
         )
 
-        # Profile image
-        # drawing.add(
-        #     drawing.image(
-        #         href=row["photo"],
-        #         insert=(20, 40),
-        #         size=(80, 100)
-        #     )
-        # )
-
-        # Name
+        # First Name
         drawing.add(
             drawing.text(
                 row["first_name"],
-                insert=(120, 70),
-                font_size=20,
-                font_weight="bold"
+                insert=(555, 645),
+                font_size=161,
+                font_family="Roboto",
+                text_anchor="middle",
             )
         )
 
-        # Title
+        # Last Name
         drawing.add(
             drawing.text(
-                row["major"],
-                insert=(120, 100),
-                font_size=14,
-                fill="gray"
+                row["last_name"],
+                insert=(555, 785),
+                font_size=96,
+                font_family="Roboto",
+                text_anchor="middle",
             )
         )
 
-        # ID number
+        # CSH Username
         drawing.add(
             drawing.text(
-                f"name: {row['csh_username']}",
-                insert=(120, 130),
-                font_size=14
+                row["csh_username"],
+                insert=(555, 905),
+                font_size=61,
+                font_family="Roboto",
+                text_anchor="middle",
+                font_style='italic',
+                fill="black"
             )
         )
 
-        # Rotated vertical label
-        # drawing.add(
-        #     drawing.text(
-        #         row['status'],
-        #         insert=(330, 180),
-        #         transform="rotate(-90,330,180)",
-        #         font_size=14,
-        #         fill="#444"
-        #     )
-        # )
+        # Major
+        drawing.add(
+            drawing.text(
+                row['major'],
+                insert=(555, 1015),
+                font_size=48,
+                font_family="Roboto",
+                text_anchor="middle",
+            )
+        )
+
+        # Graduation Year
+        drawing.add(
+            drawing.text(
+                f"Class of {row['graduation_year']}",
+                insert=(555, 1085),
+                font_size=48,
+                font_family="Roboto",
+                text_anchor="middle",
+            )
+        )
 
         drawing.save()
