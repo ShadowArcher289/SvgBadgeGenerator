@@ -53,6 +53,15 @@ def generate_svgs():
                 case _:
                     raise Exception("invalid status: " + row['status'])
 
+            # Add a border
+            drawing.add(
+                drawing.rect(
+                    insert=(0, 0), 
+                    size=('100%', '100%'), 
+                    fill='none', 
+                    stroke='black', 
+                    stroke_width=2))
+
             # encode template for embedding into the svg
             with open(card_template, "rb") as f:
                 encoded = base64.b64encode(f.read()).decode()
