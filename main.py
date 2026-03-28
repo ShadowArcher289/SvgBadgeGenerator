@@ -3,7 +3,7 @@
     csv data: first_name, last_name, csh_username, major, graduation_year (just the yyyy number), status (Member, Alumni, ...)
 
     Author: Addison Asuncion
-    Last Updated: 3/12/2026
+    Last Updated: 3/27/2026
 """
 
 import csv
@@ -59,6 +59,8 @@ def generate_svgs():
                     insert=(0, 0), 
                     size=('100%', '100%'), 
                     fill='none', 
+                    rx=100, 
+                    ry=100,
                     stroke='black', 
                     stroke_width=2))
 
