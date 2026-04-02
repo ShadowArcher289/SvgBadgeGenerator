@@ -61,8 +61,19 @@ def generate_svgs():
                     fill='none', 
                     rx=100, 
                     ry=100,
-                    stroke='black', 
-                    stroke_width=2))
+                    stroke='red', 
+                    stroke_width=5))
+            
+            # Add a line
+            drawing.add(
+                drawing.rect(
+                    insert=("360px", "7.5%"), 
+                    size=('200px', '45px'), 
+                    fill='red', 
+                    rx=20, 
+                    ry=20,
+                    stroke='red', 
+                    stroke_width=5))
 
             # encode template for embedding into the svg
             with open(card_template, "rb") as f:
