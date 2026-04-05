@@ -27,9 +27,11 @@ def generate_svgs():
     # csv data: first_name, last_name, csh_username, major, graduation_year (just the yyyy number), status (Member, Alumni, ...)
     with open("data/data.csv") as file:
         reader = csv.DictReader(file)
+        num = 0
 
         for row in reader:
-            filename = f"../../../Downloads/csh50th_cards/{row['first_name']}_{row['last_name']}_{row['csh_username']}.svg"
+            filename = f"../../../Downloads/csh50th_cards/{row['first_name']}_{row['last_name']}_{row['csh_username']}_{num}.svg"
+            num += 1
             cards_list.append(filename)
 
             drawing = svgwrite.Drawing(filename, size=(CARD_WIDTH, CARD_HEIGHT))
@@ -124,16 +126,33 @@ def generate_svgs():
                 )
             )
 
+            row['major'] = row['major'].replace('~', ',')
             # Major
-            drawing.add(
-                drawing.text(
-                    row['major'],
-                    insert=(555, 1015),
-                    font_size=get_font_size(row["major"], 48, 20),
-                    font_family="Roboto",
-                    text_anchor="middle",
+            # If there is more than 1 major, split them up into different rows
+            if(len(row['major']) > 28 and '/' in row['major']):
+                splitMajor = row['major'].split(" / ")
+                i = 0
+                for major in splitMajor:
+                    drawing.add(
+                        drawing.text(
+                            major,
+                            insert=(555, 1030-(50*i)),
+                            font_size=get_font_size(splitMajor[0], 48, 20),
+                            font_family="Roboto",
+                            text_anchor="middle",
+                        )
+                    )
+                    i += 1
+            else:
+                drawing.add(
+                    drawing.text(
+                        row['major'],
+                        insert=(555, 1015),
+                        font_size=get_font_size(row["major"], 48, 20),
+                        font_family="Roboto",
+                        text_anchor="middle",
+                    )
                 )
-            )
 
             # Graduation Year
             drawing.add(

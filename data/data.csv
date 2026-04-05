@@ -1,12 +1,12 @@
 first_name,last_name,csh_username,major,graduation_year,status
-Bob,b,bob,fishology,2035,Alumni
-Fred,b,fob,fishology,2035,Relative
-Bob,b,bob,fishology,2036,Organizer
-Maximilian,Alexander,abcdefghijklmnopqrstuvwxyz,Game Development and Design,9999,Nonmember
-Fred,b,fob,fishology,2035,Honorary
-Bob,b,bob,fishology,2036,Alumni
-Maximilian,Alexander,abcdefghijklmnopqrstuvwxyz,Game Development and Design,9999,Advisory
-Fred,b,fob,fishology,2035,Honorary
-Bob,b,bob,fishology,2036,Alumni
-Fred,b,fob,fishology,2035,Honorary
-Bob,b,bob,fishology,2036,Alumni
+Bob,b,csh_username,Computer Science,2035,Alumni
+Fred,b,csh_username,Software Engineering,2035,Relative
+Bob,b,csh_username,Computer Engineering,2036,Organizer
+Maximilian,Alexander,abcdefghijklmnopqrstuvwxyz,Game~ Design~ and Development / Computing and Information Technologies,9999,Nonmember
+Fred,b,csh_username,Computer Science / Computer Engineering,2035,Honorary
+Bob,b,csh_username,fishology,2036,Alumni
+Maximilian,Alexander,csh_username,Game Development and Design / Software Engineering / Mechanical Engineering,9999,Advisory
+Fred,b,csh_username,fishology,2035,Honorary
+Bob,b,csh_username,fishology,2036,Alumni
+Fred,b,csh_username,fishology,2035,Honorary
+Bob,b,csh_username,fishology,2036,Alumni
